@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Air Quality Dashboard</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#0f172a;
+color:white;
+text-align:center;
+}
+
+.container{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.card{
+background:#1e293b;
+padding:25px;
+margin:15px;
+border-radius:10px;
+width:180px;
+}
+
+.value{
+font-size:28px;
+font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Air Quality Monitoring Dashboard</h1>
+
+<div class="container">
+
+<div class="card">
+<h3>Flammable Gas</h3>
+<p class="value" id="mq2">0</p>
+</div>
+
+<div class="card">
+<h3>Carbon Monoxide (CO)</h3>
+<p class="value" id="mq7">0</p>
+</div>
+
+<div class="card">
+<h3>Pollutant Gas Level</h3>
+<p class="value" id="mq135">0</p>
+</div>
+
+<div class="card">
+<h3>Temperature (°C)</h3>
+<p class="value" id="temp">0</p>
+</div>
+
+<div class="card">
+<h3>Humidity (%)</h3>
+<p class="value" id="hum">0</p>
+</div>
+
+<div class="card">
+<h3>Atmospheric Pressure (hPa)</h3>
+<p class="value" id="pres">0</p>
+</div>
+
+<div class="card">
+<h3>Air Quality Index (AQI)</h3>
+<p class="value" id="aqi">0</p>
+</div>
+
+</div>
+
+<script>
+
+function updateData(){
+
+fetch("/data")
+.then(res=>res.json())
+.then(data=>{
+
+document.getElementById("mq2").innerText=data.mq2
+document.getElementById("mq7").innerText=data.mq7
+document.getElementById("mq135").innerText=data.mq135
+document.getElementById("temp").innerText=data.temp
+document.getElementById("hum").innerText=data.hum
+document.getElementById("pres").innerText=data.pres
+document.getElementById("aqi").innerText=data.aqi
+
+})
+
+}
+
+setInterval(updateData,2000)
+
+</script>
+
+</body>
+</html>
